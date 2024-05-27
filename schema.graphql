@@ -20,16 +20,10 @@ type Book {
   author: String!
 }
 
-type User {
-  id: ID!
-  name: string!
-}
-
 type BookShelfItem {
   book: Book!
   review_text: String!
   reading_status: String!
-  uid: ID!
 }
 
 # 入力オブジェクト
