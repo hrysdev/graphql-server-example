@@ -1,12 +1,17 @@
 type Query {
   selectBooks(input: SelectBooksInput!): [Book!]!
   selectBook(id: ID!): Book
+  selectBooksShelf(input: SelectBooksShelfInput!): [BookShelfItem!]!
+  selectBookShelf(id: ID!): BookShelfItem
 }
 
 type Mutation {
-  addBook(input: AddBookInput!): Book!
-  updateBook(input: UpdateBookInput!): Book!
-  deleteBook(id: ID!): Boolean!
+  addBook(input: AddBookInput!): [Book!]!
+  updateBook(input: UpdateBookInput!): [Book!]!
+  deleteBook(id: ID!): [Book!]!
+  addBookShelf(input: AddBookShelfInput!): Book!
+  updateBookShelf(input: UpdateBookShelfInput!): Boolean!
+  deleteBookShelf(id: ID!): Boolean!
 }
 
 type Book {
@@ -15,21 +20,48 @@ type Book {
   author: String!
 }
 
+type User {
+  id: ID!
+  name: string!
+}
+
+type BookShelfItem {
+  book: Book!
+  review_text: String!
+  reading_status: String!
+  uid: ID!
+}
+
+# 入力オブジェクト
+
 input AddBookInput {
   title: String!
   author: String!
 }
 
 input UpdateBookInput {
+  id: ID!
   title: String!
   author: String!
-}
-
-input DeleteBookInput {
-  id: ID!
 }
 
 input SelectBooksInput {
   title: String!
   author: String!
+}
+
+input AddBookShelfInput {
+  bookId: ID!
+  reviewText: String
+  readingStatus: String
+}
+
+input UpdateBookShelfInput {
+  reviewText: String!
+  readingStatus: String!
+}
+
+input SelectBooksShelfInput {
+  reviewText: String!
+  readingStatus: String!
 }
